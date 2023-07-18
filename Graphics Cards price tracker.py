@@ -3,6 +3,7 @@ import collections
 collections.Callable = collections.abc.Callable
 import requests
 import re
+import csv
 
 search_term = input("What product do you want to search for? ")
 
@@ -43,3 +44,11 @@ for item in sorted_items:
 	print(f"${item[1]['price']}")
 	print(item[1]['link'])
 	print("-------------------------------")
+
+with open("items.csv", "w") as csv_file:
+	writer = csv.writer(csv_file)
+	writer.writerow(["Item", "Price ($)", "Link"])
+	for item in sorted_items:
+		writer.writerow([item[0], item[1]['price'], item[1]['link']])
+	
+print("Done!")
